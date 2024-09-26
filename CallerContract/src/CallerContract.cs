@@ -11,6 +11,7 @@ namespace AElf.Contracts.CallerContract
         public override Empty SetParentContractAddress(StringValue input)
         {
             // Convert the string input to an Address type and store it in the state
+            
             State.ParentContractAddress.Value = Address.FromBase58(input.Value);
             return new Empty();
         }
@@ -20,7 +21,7 @@ namespace AElf.Contracts.CallerContract
         {
             Assert(State.ParentContractAddress.Value != null, "Parent contract address is not set.");
             
-            // Calling the Initialize function of the parent contract
+            State.BaseContract.value = "xHWrTizoqvW9abbwVdmWPGnxHihu7RKZDuEKyywLWpGwNATqH";
             var result = Context.Call<Empty>(State.ParentContractAddress.Value, nameof(BaseContractContainer.BaseContractBase.Initialize), input);
             return result;
         }
